@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  title = 'internet-of-things-power-usage-web';
+  isCollapsed = false;
 }
