@@ -1,0 +1,32 @@
+import { BaseUrl } from './base-url.enum';
+
+export let PreffixUrl = {
+    TruckOre: { variable: 'api/v1/TruckOre', key: BaseUrl.Main } ,  
+    TruckOreSearch: { variable: 'api/v1/TruckOre/search', key: BaseUrl.Main } ,  
+    TruckOrePDF: { variable: 'api/v1/TruckOre/createpdf', key: BaseUrl.Main } ,  
+    TruckOreExcel: { variable: 'api/v1/TruckOre/createExcel', key: BaseUrl.Main } ,  
+    Action: { variable: 'api/v1/Action', key: BaseUrl.Main } ,  
+    Controller: { variable: 'api/v1/Controller', key: BaseUrl.Main } ,  
+    Operator: { variable: 'api/v1/Operator', key: BaseUrl.Main } ,  
+    OperatorAssign: { variable: 'api/v1/Operator/assign', key: BaseUrl.Main } ,  
+    Permission: { variable: 'api/v1/Permission', key: BaseUrl.Main } ,  
+    Truck: { variable: 'api/v1/Truck', key: BaseUrl.Main } ,  
+    TruckAssign: { variable: 'api/v1/Truck/assign', key: BaseUrl.Main } ,  
+    TruckCondition: { variable: 'api/v1/TruckCondition', key: BaseUrl.Main } ,  
+    TruckShift: { variable: 'api/v1/TruckShift', key: BaseUrl.Main } ,  
+    TruckShiftType: { variable: 'api/v1/TruckShiftType', key: BaseUrl.Main } ,  
+    TruckShiftStatus: { variable: 'api/v1/TruckShiftStatus', key: BaseUrl.Main } ,  
+    StockPile: { variable: 'api/v1/StockPile', key: BaseUrl.Main },
+    StockPileSearch: { variable: 'api/v1/StockPile/search', key: BaseUrl.Main },
+    StockPilePDF: { variable: 'api/v1/StockPile/createpdf', key: BaseUrl.Main },
+    StockPileExcel: { variable: 'api/v1/StockPile/createExcel', key: BaseUrl.Main },
+    StockPileMaterial: { variable: 'api/v1/StockPileMaterial', key: BaseUrl.Main },
+    StatisticStockPile: { variable: 'api/v1/Statistic/Stockpile', key: BaseUrl.Main },
+    StatisticTruckOre: { variable: 'api/v1/Statistic/truckore', key: BaseUrl.Main },
+    StatisticTruckOreAll: { variable: 'api/v1/Statistic/truckore/all', key: BaseUrl.Main },
+    StatisticTruckOreOperator: { variable: 'api/v1/Statistic/truckore/operator', key: BaseUrl.Main },
+    Statistic: { variable: 'api/v1/Statistic', key: BaseUrl.Main },
+    StockPileLocation: { variable: 'api/v1/StockPileLocation', key: BaseUrl.Main },
+    User: { variable: 'api/v1/User', key: BaseUrl.Main },
+    Role: { variable: 'api/v1/Role', key: BaseUrl.Main } 
+};

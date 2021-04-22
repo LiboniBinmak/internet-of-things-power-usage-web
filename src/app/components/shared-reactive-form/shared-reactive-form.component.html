@@ -1,0 +1,140 @@
+<nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom': '53px' }"
+    [nzMaskClosable]="false" [nzWidth]="520" [nzVisible]="visible" [nzTitle]="title" (nzOnClose)="close()">
+    <nz-spin [nzSpinning]="isSpinning" nzTip="Loading..."></nz-spin>
+    <form nz-form #data="ngForm" #form="ngForm">
+        <div nz-row [nzGutter]="8">
+            <ng-container *ngFor="let item of formData">
+                <div *ngIf="item.type ==='image'" nz-col nzSpan="24">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <div class="clearfix">
+                                <nz-upload [(ngModel)]="item.value" [name]="item.id" nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76" nzName="avatar"
+                                    nzListType="picture-card" [nzShowUploadList]="false" [nzBeforeUpload]="beforeUpload"
+                                    (nzChange)="handleChange($event)">
+                                    <ng-container *ngIf="!avatarUrl">
+                                        <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></i>
+                                        <div class="ant-upload-text">Upload</div>
+                                    </ng-container>
+                                    <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
+                                </nz-upload>
+                            </div>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div [class.hide]="!item.visible" *ngIf="(item.type ==='text' || item.type ==='email')" nz-col
+                    nzSpan="12">
+                    <nz-form-label>{{item.display}}</nz-form-label>
+                    <nz-form-item>
+                        <nz-form-control nzHasFeedback [nzSpan]="24" [nzErrorTip]="itemValidation">
+                            <input nz-input [disabled]='item.disabled' [(ngModel)]="item.value" name="{{item.id}}"
+                                type="{{item.type}}" [required]="item.required" />
+                            <ng-template #itemValidation let-control>
+                                <ng-container *ngIf="control.hasError('required')">
+                                    {{item.display}} is required</ng-container>
+                            </ng-template>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div [class.hide]="!item.visible" *ngIf="(item.type ==='number')" nz-col nzSpan="12">
+                    <nz-form-label>{{item.display}}</nz-form-label>
+                    <nz-form-item>
+                        <nz-form-control nzHasFeedback [nzSpan]="24" [nzErrorTip]="itemValidationNumber">
+                            <nz-input-number [disabled]='item.disabled' [(ngModel)]="item.value" name="{{item.id}}"
+                                [required]="item.required" [nzStep]="1" style="width: 100%;"></nz-input-number>
+                            <ng-template #itemValidationNumber let-control>
+                                <ng-container *ngIf="control.hasError('required')">
+                                    {{item.display}} is required</ng-container>
+                            </ng-template>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div [class.hide]="!item.visible" *ngIf="(item.type ==='select')" nz-col nzSpan="12">
+                    <nz-form-label>{{item.display}}</nz-form-label>
+                    <nz-form-item>
+                        <nz-form-control nzHasFeedback [nzSpan]="24" [nzErrorTip]="itemValidationSelect">
+                            <nz-select [disabled]='item.disabled' nzShowSearch nzAllowClear nzPlaceHolder="Select {{item.display}}"
+                                [(ngModel)]="item.value" [name]="item.id" [required]="item.required">
+                                <nz-option *ngFor="let option of item.source" [nzLabel]="option[item.sourceName]"
+                                    [nzValue]="option[item.sourceId]"></nz-option>
+                            </nz-select>
+                            <ng-template #itemValidationSelect let-control>
+                                <ng-container *ngIf="control.hasError('required')">
+                                    {{item.display}} is required</ng-container>
+                            </ng-template>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div [class.hide]="!item.visible" *ngIf="item.type ==='textarea'" nz-col nzSpan="24">
+                    <nz-form-item>
+                        <nz-form-label>{{item.display}}</nz-form-label>
+                        <nz-form-control nzHasFeedback [nzSpan]="24" [nzErrorTip]="itemValidationTextarea">
+                            <textarea nz-input [disabled]='item.disabled' [(ngModel)]="item.value" name="{{item.id}}"
+                                [required]="item.required" placeholder="Enter {{item.display}}"
+                                [nzAutosize]="{ minRows: 4, maxRows: 4 }"></textarea>
+                            <ng-template #itemValidationTextarea let-control>
+                                <ng-container *ngIf="control.hasError('required')">
+                                    {{item.display}} is required</ng-container>
+                            </ng-template>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div [class.hide]="!item.visible" *ngIf="item.type ==='date'" nz-col nzSpan="12">
+                    <nz-form-label>{{item.display}}</nz-form-label>
+                    <nz-form-item>
+                        <nz-form-control nzHasFeedback [nzSpan]="24" [nzErrorTip]="itemValidationDate">
+                            <nz-date-picker [disabled]='item.disabled' [(ngModel)]="item.value" [name]="item.id"
+                                [required]="item.required" style="width: 100%;"></nz-date-picker>
+                            <ng-template #itemValidationDate let-control>
+                                <ng-container *ngIf="control.hasError('required')">
+                                    {{item.display}} is required</ng-container>
+                            </ng-template>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div [class.hide]="!item.visible" *ngIf="item.type ==='time'" nz-col nzSpan="12">
+                    <nz-form-label>{{item.display}}</nz-form-label>
+                    <nz-form-item>
+                        <nz-form-control nzHasFeedback [nzSpan]="24" [nzErrorTip]="itemValidationTime">
+                            <nz-date-picker [disabled]='item.disabled' nzFormat="yyyy-MM-dd HH:mm:ss" nzShowTime
+                                [(ngModel)]="item.value" [name]="item.id" [required]="item.required"></nz-date-picker>
+                            <ng-template #itemValidationTime let-control>
+                                <ng-container *ngIf="control.hasError('required')">
+                                    {{item.display}} is required</ng-container>
+                            </ng-template>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div [class.hide]="!item.visible" *ngIf="item.type ==='checkbox'" nz-col nzSpan="12">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <label [disabled]='item.disabled' [(ngModel)]="item.value" [name]="item.id" nz-checkbox>{{item.display}}</label>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div [class.hide]="!item.visible" *ngIf="item.type ==='radio'" nz-col nzSpan="12">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-radio-group>
+                                <label nz-radio nzValue="A">A</label>
+                                <label nz-radio nzValue="B">B</label>
+                                <label nz-radio nzValue="C">C</label>
+                                <label nz-radio nzValue="D">D</label>
+                            </nz-radio-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div [class.hide]="!item.visible" *ngIf="item.type ==='rate'" nz-col nzSpan="12">
+                    <nz-form-item>
+                        <nz-form-label>{{item.display}}</nz-form-label>
+                        <nz-form-control>
+                            <nz-rate [(ngModel)]="value" name="first" [nzTooltips]="tooltips"></nz-rate>
+                            <span *ngIf="value" class="ant-rate-text">{{ value ? tooltips[value - 1] : '' }}</span>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </ng-container>
+        </div>
+        <button nz-button nzType="primary" type="submit" [disabled]="!data.valid"
+            (click)="onSubmit(data)">{{title}}</button>
+    </form>
+</nz-drawer>

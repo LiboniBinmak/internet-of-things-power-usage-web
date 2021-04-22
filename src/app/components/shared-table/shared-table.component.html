@@ -1,0 +1,61 @@
+<nz-table #nzTable [nzData]="input" [nzScroll]="{ x: '500px' }">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <ng-container *ngFor="let k = index; let heading of headings">
+          <th *ngIf="heading.visible" scope="col">
+            {{heading.value}}
+          </th>
+        </ng-container>
+        <th scope="col" *ngIf='actions.action'></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i = index; let data of nzTable.data" [class.tablerow-selected]="i === selectedRow">
+        <td>{{ i+1 }}</td>
+        <ng-container *ngFor="let heading of headings ;let j = index;">
+          <td *ngIf="heading.visible" [nzEllipsis]= "heading.type ==='textarea'">
+            <div *ngIf="heading.type ==='image'"> <img [src]="data[heading.key]" style="width: 100%" />
+            </div>
+            <div *ngIf="heading.type ==='text' || heading.type ==='textarea'">
+              {{data[heading.key]}}
+            </div>
+            <div *ngIf="heading.type ==='number'">
+              {{data[heading.key]}}
+            </div>
+            <div *ngIf="heading.type ==='date' || heading.type ==='time'">
+              {{data[heading.key] | date: 'yyyy-MM-dd HH:mm:ss'}}
+            </div>
+            <div *ngIf="heading.type ==='select' && !heading.nested">
+              <div *ngFor="let option of heading.source">
+                <div *ngIf="option[heading.sourceId]===data[heading.key]">
+                  {{option[heading.sourceName]}}
+                </div>
+              </div>
+            </div>
+            <div *ngIf="heading.type ==='checkbox'">
+              <i *ngIf="data[heading.key]" nz-icon nzType="check" class="icon-check" nzTheme="outline"></i>
+              <i *ngIf="!data[heading.key]" nz-icon nzType="close" class="icon-close" nzTheme="outline"></i>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container *ngIf='actions.action'>
+          <td>
+            <a *ngIf='actions.view'>
+              <i nz-icon nzType="folder-view" class="icon-info" (click)="viewRow(data, i)" nz-popover
+                nzPopoverContent="View" nzTheme="outline"></i>
+            </a>
+            <nz-divider *ngIf='actions.view' nzType="vertical"></nz-divider>
+            <a *ngIf='actions.edit'>
+              <i nz-icon nzType="edit" class="icon-edit" (click)="editRow(data, i)" nz-popover 
+              nzPopoverContent="Edit" nzTheme="outline"></i>
+            </a>
+            <nz-divider *ngIf='actions.edit' nzType="vertical"></nz-divider>
+            <a *ngIf='actions.delete' nz-popconfirm nzPopconfirmTitle="Are you sure delete this item?" nzPopconfirmPlacement="bottom"
+              (nzOnConfirm)="deleteRow(data.id, i)"><i nz-icon nzType="delete" class="icon-delete" nz-popover
+                nzPopoverContent="Delete" nzTheme="outline"></i></a>
+          </td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </nz-table>
