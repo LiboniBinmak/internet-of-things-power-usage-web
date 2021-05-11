@@ -38,4 +38,7 @@ export class RequestHandlerService {
   getAll(preffix): any {
     return this.http.get(preffix.key + preffix.variable, this.configService.GetOptions());
   }
+  getAuth(preffix): any {
+    return this.http.get(preffix, this.configService.GetAuthOptions());
+  }
 }

@@ -88,7 +88,7 @@ export class SharedTableComponent implements OnChanges {
   
   editRow(data, selectedRow) {
     this.selectedRow = selectedRow;
-    this.result.emit({ Info: data, ActionType: ActionType.edit });
+    this.result.emit({ Info: data, ActionType: ActionType.edit,Visible:false });
   }
 
   viewRow(data, selectedRow){

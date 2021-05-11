@@ -69,8 +69,7 @@ export class SharedReactiveFormComponent implements OnChanges {
         pattern: this.mapper[prop].regex,
         required: this.mapper[prop].required
       });
-    }
-
+    }    
   }
 
   close(): void {

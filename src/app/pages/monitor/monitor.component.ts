@@ -8,8 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class MonitorComponent implements OnInit {
 
   constructor() { }
-
+  
   ngOnInit(): void {
   }
-
 }

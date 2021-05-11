@@ -1,1 +1,49 @@
-<p>work-place works!</p>
+<div nz-row [nzGutter]="[16, 24]">
+    <div *ngFor="let appliance of appliances">
+        <nz-card  style="width:220px; margin: 1em;" [nzCover]="coverTemplate"
+        [nzActions]="[actionSetting, actionEdit]">
+        <nz-card-meta [nzTitle]="appliance.name" [nzDescription]="appliance.description">
+        </nz-card-meta>
+    </nz-card>
+    <ng-template #coverTemplate>
+        <img alt="example" [src]="appliance.image" style="height: 12em;" />
+    </ng-template>
+    <ng-template #actionSetting>
+        <i nz-icon nzType="folder-view" (click)="showPattern(appliance)"></i>
+    </ng-template>
+    <ng-template #actionEdit>
+        <i nz-icon *ngIf="!appliance.isBeingConfigured" 
+        [nzType]="'check-circle'"
+        [nzTheme]="'twotone'" [nzTwotoneColor]="'#52c41a'"
+        (click)="configure(appliance)"></i>
+        <ng-template #indicatorTemplate><i nz-icon nzType="loading"></i></ng-template>
+        <nz-spin nzSimple [nzIndicator]="indicatorTemplate" *ngIf="appliance.isBeingConfigured" nzSimple style="color: red;" 
+        (click)="configure(appliance)"> </nz-spin>
+    </ng-template>
+    <!-- <ng-template #actionEllipsis>
+        <i nz-icon nzType="ellipsis" (click)="showDetails(appliance)"></i>
+    </ng-template> -->
+    </div>    
+</div>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Pattern" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+   
+        <nz-table #basicTable [nzData]="dataTable">
+            <thead>
+              <tr>
+                  <th>#</th>
+                <th>Current</th>
+                <th>Power</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of basicTable.data; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{data.current}} mA</td>
+                <td>{{data.power}} W</td>
+                <td>{{data.dateCreated | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+              </tr>
+            </tbody>
+          </nz-table>
+  </nz-modal>

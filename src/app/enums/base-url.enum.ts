@@ -1,4 +1,4 @@
 export enum BaseUrl {
-    //Main="http://binmakdev.dedicated.co.za:84/",
-    Main="http://localhost:1000/",
+    Main="https://192.168.43.38:5001/",
+    Auth="https://libs.auth0.com/api/v2/"
 }

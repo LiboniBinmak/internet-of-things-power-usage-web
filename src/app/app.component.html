@@ -33,6 +33,15 @@
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/status">Status</a>
           </li>
+          <li *ngIf="role" nz-menu-item nzMatchRouter>
+            <a routerLink="/town">Town</a>
+          </li>
+          <li *ngIf="role" nz-menu-item nzMatchRouter>
+            <a routerLink="/house-hold">House</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/house-hold-user">User</a>
+          </li>
         </ul>
       </li>
     </ul>
@@ -46,7 +55,14 @@
                [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
             ></i>
         </span>
+        <span class="logout-header" (click)="auth.logout({ returnTo: document.location.origin })">
+          Hi {{name}}
+          <i class="logout" nz-icon nzType="logout"  nzTheme="outline" 
+          nzTooltipTitle="Logout" nzTooltipPlacement="bottom" nz-tooltip >
+          </i>
+        </span>
       </div>
+      
     </nz-header>
     <nz-content>
       <div class="inner-content">

@@ -1,0 +1,6 @@
+<h1>Town <nz-spin [nzSpinning]="isSpinning" nzTip="Loading..."></nz-spin> </h1>
+<button nz-button nzType="primary" (click)="open()">Create</button>
+<app-shared-table [input]='dataTable' [actions]='actions' [change]="visible" [url]='preffixUrl' [mapper]="map" (result)="tableResult($event)">
+</app-shared-table>
+<app-shared-reactive-form (result)="result($event)" [list]='dataTable' [title]='title' [input]='input' [actionType]='actionType' 
+[url]='preffixUrl' [visible]="visible" [mapper]="map"></app-shared-reactive-form>

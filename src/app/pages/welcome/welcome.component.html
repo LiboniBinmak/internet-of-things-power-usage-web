@@ -1,1 +1,43 @@
-<app-shared-reactive-form></app-shared-reactive-form>
+<div style="background: #ECECEC; padding: 30px;">
+    <nz-row [nzGutter]="16">
+        <nz-col [nzSpan]="8">
+            <nz-card>
+                <nz-statistic [nzValue]="('52' | number: '1.0-2')!" nzTitle="Total Power/W"
+                    [nzPrefix]="powerTotal" [nzValueStyle]="{ color: '#00457d' }">
+                </nz-statistic>
+                <ng-template #powerTotal><i nz-icon nzType="thunderbolt" nzTheme="outline"></i></ng-template>
+            </nz-card>
+        </nz-col>
+        <nz-col [nzSpan]="8">
+            <nz-card>
+                <nz-statistic [nzValue]="(houses.length | number: '1.0-2')!" nzTitle="HouseHold" 
+                [nzPrefix]="houseNumber"  [nzValueStyle]="{ color: '#f17d30' }">
+                </nz-statistic>
+                <ng-template #houseNumber><i nz-icon nzType="home" nzTheme="outline"></i></ng-template>
+            </nz-card>
+        </nz-col>
+        <nz-col [nzSpan]="8">
+            <nz-card>
+                <nz-statistic [nzValue]="(dataTable.length | number: '1.0-2')!" nzTitle="Appliances"
+                 [nzPrefix]="applianceTotal" [nzValueStyle]="{ color: '#606062' }">
+                </nz-statistic>
+                <ng-template #applianceTotal><i nz-icon nzType="ungroup" nzTheme="outline"></i></ng-template>
+            </nz-card>
+        </nz-col>
+    </nz-row>
+</div>
+
+<div style="background: #ECECEC;">
+    <nz-row [nzGutter]="16">
+        <nz-col [nzSpan]="12">
+            <nz-card nzTitle="Live Power Consumption">
+                <app-live-total-power-chart></app-live-total-power-chart>
+            </nz-card>
+        </nz-col>
+        <nz-col [nzSpan]="12">
+            <nz-card nzTitle="Live Appliance Power Consumption">
+                <app-live-appliance-chart></app-live-appliance-chart>
+            </nz-card>
+        </nz-col>
+    </nz-row>
+</div>

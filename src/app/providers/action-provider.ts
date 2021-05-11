@@ -4,63 +4,7 @@ import { Actions } from '../interfaces/actions';
 export class ActionProvider {
     static pageActions(pages: Pages):Actions {
         switch (pages) {
-            case Pages.action:
-                return {
-                    action: true,
-                    add: true,
-                    delete: true,
-                    edit: true,
-                    view: false
-                };
-            case Pages.controller:
-                return {
-                    action: true,
-                    add: true,
-                    delete: true,
-                    edit: true,
-                    view: false
-                };
-            case Pages.truckCondition:
-                return {
-                    action: true,
-                    add: true,
-                    delete: true,
-                    edit: true,
-                    view: false
-                };
-            case Pages.operator:
-                return {
-                    action: true,
-                    add: true,
-                    delete: false,
-                    edit: true,
-                    view: true
-                };
-            case Pages.permission:
-                return {
-                    action: true,
-                    add: true,
-                    delete: true,
-                    edit: true,
-                    view: false
-                };
-            case Pages.role:
-                return {
-                    action: true,
-                    add: true,
-                    delete: true,
-                    edit: true,
-                    view: false
-                };
-            case Pages.stockpile:
-                return {
-                    action: true,
-                    add: true,
-                    delete: false,
-                    edit: false,
-                    view: true
-                };
-            case Pages.stockpileLocation:
+            case Pages.status:
                 return {
                     action: true,
                     add: true,
@@ -68,62 +12,62 @@ export class ActionProvider {
                     edit: true,
                     view: true
                 };
-            case Pages.stockpileMaterial:
+            case Pages.monitor:
                 return {
                     action: true,
                     add: true,
                     delete: true,
                     edit: true,
-                    view: false
+                    view: true
                 };
-            case Pages.truck:
+            case Pages.welcome:
                 return {
                     action: true,
                     add: true,
                     delete: true,
                     edit: true,
-                    view: false
-                };
-            case Pages.truckOre:
-                return {
-                    action: true,
-                    add: true,
-                    delete: false,
-                    edit: false,
                     view: true
                 };
-            case Pages.truckShift:
+            case Pages.appliance:
                 return {
                     action: true,
                     add: true,
-                    delete: false,
+                    delete: true,
                     edit: true,
                     view: true
                 };
-            case Pages.truckShiftType:
-                return {
-                    action: true,
-                    add: false,
-                    delete: false,
-                    edit: false,
-                    view: false
-                };
-            case Pages.TruckShiftStatus:
+            case Pages.workPlace:
                 return {
                     action: true,
                     add: true,
-                    delete: false,
-                    edit: false,
-                    view: false
-                };
-            case Pages.user:
-                return {
-                    action: true,
-                    add: true,
-                    delete: false,
+                    delete: true,
                     edit: true,
-                    view: false
-                };
+                    view: true
+                };    
+                case Pages.house:
+                return {
+                    action: true,
+                    add: true,
+                    delete: true,
+                    edit: true,
+                    view: true
+                };    
+                case Pages.user:
+                return {
+                    action: true,
+                    add: true,
+                    delete: true,
+                    edit: true,
+                    view: true
+                };    
+                case Pages.town:
+                return {
+                    action: true,
+                    add: true,
+                    delete: true,
+                    edit: true,
+                    view: true
+                };            
             default:
                 return {
                     action: false,
