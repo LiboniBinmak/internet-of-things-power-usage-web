@@ -12,42 +12,46 @@ import { SignalRService } from 'src/app/services/signal-r.service';
 })
 export class WelcomeComponent implements OnInit {
   isSpinning = false;
-  dataTable: any;  
-  houses: any;  
+  dataTable: any;
+  houses: any;
   powerTotal: number = 0;
   preffixUrl: any;
   visible = false;
-  title:string;
+  title: string;
   visiblePreview = false;
   constructor(public signalRService: SignalRService, private request: RequestHandlerService,
     private message: NzMessageService) { }
 
   ngOnInit() {
     this.signalRService.startConection();
-    this.signalRService.addAppliancePatternListener();   
-    this.signalRService.addAppliancePowerListener();   
-    this.signalRService.addCurrentPowerListener();  
+    this.signalRService.addAppliancePatternListener();
+    this.signalRService.addAppliancePowerListener();
+    this.signalRService.addCurrentPowerListener();
     this.preffixUrl = PreffixUrl.Appliance;
     var tempPreffixUrl;
-    if(localStorage.getItem(StorageKey.Role) === "Administrator")
-    tempPreffixUrl = PreffixUrl.Appliance;
-    else 
-    tempPreffixUrl = PreffixUrl.ApplianceHouseId
+    if (localStorage.getItem(StorageKey.Role) === "Administrator")
+      tempPreffixUrl = PreffixUrl.Appliance;
+    else
+      tempPreffixUrl = PreffixUrl.ApplianceHouseId
     this.request.getAll(tempPreffixUrl).subscribe(result => {
       this.request.getAll(PreffixUrl.House).subscribe(houses => {
-        this.request.getAll(PreffixUrl.SensorReading).subscribe(houses => {
+        this.request.getAll(PreffixUrl.SensorReadingPower).subscribe(power => {          
+          console.log(power);
+          console.log(houses);
+          console.log(result);          
+          this.powerTotal = power;
           this.dataTable = result;
           this.houses = houses;
-          this.isSpinning=false;
+          this.isSpinning = false;
         }, error => {
           this.dataTable = [];
           this.message.error(error.error);
-          this.isSpinning=false;
-        });      });
-    }); 
+          this.isSpinning = false;
+        });
+      });
+    });
     setInterval(function () {
       this.powerTotal = localStorage.getItem(StorageKey.CurrentPower);
-      }, 2000);
+    }, 1000);
   }
-
 }
