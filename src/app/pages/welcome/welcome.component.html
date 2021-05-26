@@ -2,10 +2,10 @@
     <nz-row [nzGutter]="16">
         <nz-col [nzSpan]="8">
             <nz-card>
-                <nz-statistic [nzValue]="('52' | number: '1.0-2')!" nzTitle="Total Power/W"
-                    [nzPrefix]="powerTotal" [nzValueStyle]="{ color: '#00457d' }">
+                <nz-statistic [nzValue]="(powerTotal | number: '1.0-2')!" nzTitle="Total Power/W"
+                    [nzPrefix]="powerTotalTag" [nzValueStyle]="{ color: '#00457d' }">
                 </nz-statistic>
-                <ng-template #powerTotal><i nz-icon nzType="thunderbolt" nzTheme="outline"></i></ng-template>
+                <ng-template #powerTotalTag><i nz-icon nzType="thunderbolt" nzTheme="outline"></i></ng-template>
             </nz-card>
         </nz-col>
         <nz-col [nzSpan]="8">

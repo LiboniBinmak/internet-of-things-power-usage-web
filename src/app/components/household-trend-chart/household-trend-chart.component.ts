@@ -6,6 +6,8 @@ import * as am4plugins_bullets from "@amcharts/amcharts4/plugins/bullets";
 
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { AxisRendererCurveX, AxisRendererCurveY } from '@amcharts/amcharts4/plugins/timeline';
+import { RequestHandlerService } from 'src/app/services/request-handler.service';
+import { PreffixUrl } from 'src/app/enums/preffix-url.enum';
 
 /* Chart code */
 // Themes begin
@@ -20,9 +22,13 @@ am4core.useTheme(am4themes_animated);
 export class HouseholdTrendChartComponent implements OnInit {
 
 
-  constructor(private zone: NgZone) { }
-
+  constructor(private zone: NgZone, private request: RequestHandlerService) { }
+  onChange(event){
+    console.log(event);
+  }
   ngAfterViewInit() {
+    this.request.post(PreffixUrl.ApplianceSensorReadingStatistics).subscribe((result) => {});
+
     this.zone.runOutsideAngular(() => {
       let chart = am4core.create("chartdiv", am4plugins_timeline.SerpentineChart);
       chart.curveContainer.padding(100, 20, 50, 20);

@@ -29,13 +29,13 @@ export class SignalRService {
   public addAppliancePatternListener = () => {
     this.hubConnection.on('AppliancePattern', (data) => {
       this.data = data;      
-      localStorage.setItem(StorageKey.AppliancePattern,data);
+      localStorage.setItem(StorageKey.AppliancePattern,JSON.stringify(data));
     });
   }
   public addAppliancePowerListener = () => {
     this.hubConnection.on('AppliancePower', (data) => {
       this.data = data;
-      localStorage.setItem(StorageKey.AppliancePower,data);
+      localStorage.setItem(StorageKey.AppliancePower,JSON.stringify(data));
     });
   }
 }

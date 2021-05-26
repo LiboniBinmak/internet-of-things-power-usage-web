@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd';
 import { PreffixUrl } from 'src/app/enums/preffix-url.enum';
 import { StorageKey } from 'src/app/enums/storage-key.enum';
@@ -10,19 +10,17 @@ import { SignalRService } from 'src/app/services/signal-r.service';
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.less']
 })
-export class WelcomeComponent implements OnInit {
+export class WelcomeComponent implements OnChanges {
   isSpinning = false;
-  dataTable: any;
-  houses: any;
+  dataTable: any = [];
+  houses: any = [];
   powerTotal: number = 0;
   preffixUrl: any;
   visible = false;
   title: string;
   visiblePreview = false;
   constructor(public signalRService: SignalRService, private request: RequestHandlerService,
-    private message: NzMessageService) { }
-
-  ngOnInit() {
+    private message: NzMessageService) {
     this.signalRService.startConection();
     this.signalRService.addAppliancePatternListener();
     this.signalRService.addAppliancePowerListener();
@@ -35,10 +33,7 @@ export class WelcomeComponent implements OnInit {
       tempPreffixUrl = PreffixUrl.ApplianceHouseId
     this.request.getAll(tempPreffixUrl).subscribe(result => {
       this.request.getAll(PreffixUrl.House).subscribe(houses => {
-        this.request.getAll(PreffixUrl.SensorReadingPower).subscribe(power => {          
-          console.log(power);
-          console.log(houses);
-          console.log(result);          
+        this.request.getAll(PreffixUrl.SensorReadingPower).subscribe(power => {
           this.powerTotal = power;
           this.dataTable = result;
           this.houses = houses;
@@ -50,8 +45,14 @@ export class WelcomeComponent implements OnInit {
         });
       });
     });
-    setInterval(function () {
-      this.powerTotal = localStorage.getItem(StorageKey.CurrentPower);
+    setInterval(() => {
+      this.request.getAll(PreffixUrl.SensorReadingPower).subscribe(power => {
+        this.powerTotal = power;
+      });
     }, 1000);
+
+  }
+
+  ngOnChanges() {
   }
 }
