@@ -51,6 +51,8 @@ export class WorkPlaceComponent implements OnChanges {
   }
 
   configure(data){
+    console.log(data);
+    
     this.request.get(data.id,PreffixUrl.ApplianceActivateisBeingConfigured).subscribe(appliance => {
       const updateItem = this.appliances.find(a=> a.id === data.id);
       const index = this.appliances.indexOf(updateItem);

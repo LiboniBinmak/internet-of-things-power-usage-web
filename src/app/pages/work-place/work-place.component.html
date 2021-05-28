@@ -17,7 +17,8 @@
         [nzTheme]="'twotone'" [nzTwotoneColor]="'#52c41a'"
         (click)="configure(appliance)"></i>
         <ng-template #indicatorTemplate><i nz-icon nzType="loading"></i></ng-template>
-        <nz-spin nzSimple [nzIndicator]="indicatorTemplate" *ngIf="appliance.isBeingConfigured" nzSimple style="color: red;" 
+        <nz-spin nzSimple [nzIndicator]="indicatorTemplate" 
+        *ngIf="appliance.isBeingConfigured" nzSimple style="color: red;" 
         (click)="configure(appliance)"> </nz-spin>
     </ng-template>
     <!-- <ng-template #actionEllipsis>

@@ -85,7 +85,6 @@ export class LiveTotalPowerChartComponent implements OnInit {
             function startInterval() {
                 interval = setInterval(function () {
                   power = JSON.parse(localStorage.getItem(StorageKey.AppliancePower)).power
-                  console.log(power);                  
                   let lastdataItem = series.dataItems.getIndex(series.dataItems.length - 1);
                     chart.addData(
                         { date: new Date(lastdataItem.dateX.getTime() + 1000), value: power },

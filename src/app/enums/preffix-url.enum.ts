@@ -18,5 +18,6 @@ export let PreffixUrl = {
     SensorReading: { variable: 'api/SensorReading', key: BaseUrl.Main },
     SensorReadingPower: { variable: 'api/SensorReading/power', key: BaseUrl.Main },
     Roles: { variable: 'users', key: BaseUrl.Auth },
-    ApplianceSensorReadingStatistics: {variable: 'api/ApplianceSensorReading/statistics', key:BaseUrl.Main}
+    ApplianceSensorReadingStatistics: {variable: 'api/ApplianceSensorReading/statistics', key:BaseUrl.Main},
+    ApplianceSensorReadingHouseTrend: {variable: 'api/ApplianceSensorReading/house-trend', key:BaseUrl.Main}
 };
